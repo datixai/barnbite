@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Cafe Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css?v=12">
+</head>
+<body>
+
+<div class="login" id="login">
+  <form class="login-box" id="loginForm">
+    <div class="logo-badge" id="loginLogo"></div>
+    <h1 id="loginTitle">Cafe Admin</h1>
+    <p>Enter the admin PIN to manage the menu and orders.</p>
+    <input type="password" id="pin" inputmode="numeric" placeholder="PIN" autocomplete="current-password" aria-label="Admin PIN">
+    <span class="err" id="pinErr">Wrong PIN, try again.</span>
+    <button class="btn btn-yellow" type="submit">Log in</button>
+    <a href="index.html" class="back">Back to the website</a>
+  </form>
+</div>
+
+<div class="app" id="app" hidden>
+  <aside class="side">
+    <div class="side-brand"><div class="logo-badge sm" id="sideLogo"></div><div><b id="sideName">Cafe</b><small>Admin panel</small></div></div>
+    <nav id="tabs">
+      <button data-tab="orders" class="on"><span>Orders</span><i id="newCount" hidden>0</i></button>
+      <button data-tab="products"><span>Products</span></button>
+      <button data-tab="categories"><span>Categories</span></button>
+      <button data-tab="settings"><span>Settings &amp; Branches</span></button>
+    </nav>
+    <div class="side-foot">
+      <a href="index.html" target="_blank" class="btn btn-ghost">View website</a>
+      <button class="btn btn-ghost" id="logout">Log out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <section data-panel="orders">
+      <div class="head"><div><h1>Orders</h1><p>New orders appear here as soon as they are placed on this device.</p></div>
+        <div class="filters" id="orderFilters">
+          <button data-s="all" class="on">All</button><button data-s="new">New</button><button data-s="preparing">Preparing</button>
+          <button data-s="ready">Ready / On the way</button><button data-s="done">Completed</button><button data-s="cancelled">Cancelled</button>
+        </div>
+      </div>
+      <div class="stats" id="stats"></div>
+      <div id="orderList" class="orders"></div>
+    </section>
+
+    <section data-panel="products" hidden>
+      <div class="head"><div><h1>Products</h1><p>Add, edit, hide or delete menu items. Changes show on the website straight away.</p></div>
+        <button class="btn btn-yellow" id="addProduct">+ Add product</button></div>
+      <div class="toolbar">
+        <input type="search" id="pSearch" placeholder="Search products" aria-label="Search products">
+        <select id="pCat" aria-label="Filter by category"></select>
+      </div>
+      <div class="table-wrap"><table class="table"><thead><tr><th></th><th>Product</th><th>Category</th><th>Price</th><th>Available</th><th>Popular</th><th></th></tr></thead><tbody id="pRows"></tbody></table></div>
+    </section>
+
+    <section data-panel="categories" hidden>
+      <div class="head"><div><h1>Categories</h1><p>Sections of the menu. Use the arrows to change their order on the website.</p></div>
+        <button class="btn btn-yellow" id="addCat">+ Add category</button></div>
+      <div id="catList" class="cat-list"></div>
+    </section>
+
+    <section data-panel="settings" hidden>
+      <div class="head"><div><h1>Settings &amp; Branches</h1><p>Contact details, ordering options and branches.</p></div></div>
+      <form id="setForm" class="panel form two"></form>
+      <h2 class="sub-h">Branches</h2>
+      <p class="hint">The website takes orders for the branch marked as the main online branch. Switch on more branches later and customers can pick one at checkout.</p>
+      <div id="branchRows" class="branches"></div>
+      <h2 class="sub-h">Backup</h2>
+      <div class="panel backup">
+        <button class="btn btn-dark" id="exportBtn">Download backup (.json)</button>
+        <label class="btn btn-dark">Restore backup<input type="file" id="importFile" accept="application/json" hidden></label>
+        <button class="btn btn-danger" id="resetMenu">Reset menu to original</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="modal" id="modal"><div class="box" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="js/menu-data.js?v=12"></script>
+<script src="js/icons.js?v=12"></script>
+<script src="js/store.js?v=12"></script>
+<script src="js/admin.js?v=12"></script>
+</body>
+</html>
